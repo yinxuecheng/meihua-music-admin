@@ -5,6 +5,11 @@
         <q-btn dense flat round icon="menu" @click="left = !left" />
 
         <q-toolbar-title> ♣️音乐盒 </q-toolbar-title>
+
+        <q-space />
+        <q-avatar color="teal" text-color="white">{{
+          nicknameFirstWord
+        }}</q-avatar>
       </q-toolbar>
     </q-header>
 
@@ -19,8 +24,18 @@
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { computed } from 'vue'
+
 export default {
   name: 'Layout',
+  setup() {
+    const store = useStore()
+
+    return {
+      nicknameFirstWord: computed(() => store.getters['user/nicknameFirstWord'])
+    }
+  },
   data() {
     return {
       left: false
