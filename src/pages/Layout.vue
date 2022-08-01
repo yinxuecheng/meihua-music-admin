@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="left = !left" />
 
-        <q-toolbar-title> ♣️音乐盒 </q-toolbar-title>
+        <q-toolbar-title> ♣️音乐 </q-toolbar-title>
 
         <q-space />
         <q-avatar color="teal" text-color="white">{{
@@ -14,7 +14,23 @@
     </q-header>
 
     <q-drawer show-if-above v-model="left" side="left" bordered>
-      drawer content
+      <q-list padding class="text-primary">
+        <q-item
+          clickable
+          v-ripple
+          active-class="my-menu-link"
+          v-for="item in menuRoutes"
+          :key="item.meta.title"
+          :active="item.name === route.name"
+          :to="item.path"
+        >
+          <q-item-section avatar>
+            <q-icon :name="item.meta.icon" />
+          </q-item-section>
+
+          <q-item-section>{{ item.meta.title }}</q-item-section>
+        </q-item>
+      </q-list>
     </q-drawer>
 
     <q-page-container>
@@ -26,14 +42,22 @@
 <script>
 import { useStore } from 'vuex'
 import { computed } from 'vue'
+import { menuRoutes } from '../router/index'
+import { useRoute } from 'vue-router'
 
 export default {
   name: 'Layout',
   setup() {
     const store = useStore()
 
+    const route = useRoute()
+
     return {
-      nicknameFirstWord: computed(() => store.getters['user/nicknameFirstWord'])
+      nicknameFirstWord: computed(
+        () => store.getters['user/nicknameFirstWord']
+      ),
+      menuRoutes,
+      route
     }
   },
   data() {
@@ -43,3 +67,9 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+.my-menu-link
+  color: white!important
+  background: #F2C037
+</style>

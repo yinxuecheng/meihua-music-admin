@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import { Quasar } from 'quasar'
+import { Quasar, Notify } from 'quasar'
 import roter from './router'
 import store from './store'
 import './permissions'
@@ -15,7 +15,9 @@ myApp.use(roter)
 myApp.use(store)
 
 myApp.use(Quasar, {
-  plugins: {}
+  plugins: {
+    Notify
+  }
 })
 
 myApp.mount('#app')
