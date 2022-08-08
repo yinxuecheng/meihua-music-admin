@@ -41,10 +41,10 @@ export default {
 
     const fetchData = () => {
       search({ page: 0 }).then((res) => {
-        data.value = res.data.content
-        pagination.value.page = res.data.number + 1
-        pagination.value.rowsPerPage = res.data.size
-        pagination.value.rowsNumber = res.data.totalElement
+        data.value = res.content
+        pagination.value.page = res.number + 1
+        pagination.value.rowsPerPage = res.size
+        pagination.value.rowsNumber = res.totalElement
       })
     }
 

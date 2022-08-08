@@ -3,6 +3,7 @@ import store from '../store'
 import { Notify } from 'quasar'
 
 const baseURL = import.meta.env.VITE_API_HOST
+const tokenPrefix = 'Bearer '
 
 const instance = axios.create({
   baseURL
@@ -12,7 +13,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     if (store.state.user.token) {
-      config.headers['Authorization'] = store.state.user.token
+      config.headers['Authorization'] = tokenPrefix + store.state.user.token
     }
     return config
   },
@@ -24,9 +25,10 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => {
-    return response
+    return response.data
   },
   (error) => {
+    store.dispatch('user/logout')
     Notify.create({
       type: 'negative',
       message: error.message,
