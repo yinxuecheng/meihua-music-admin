@@ -33,6 +33,7 @@ const actions = {
           resolve()
         })
         .catch((error) => {
+          console.log(error)
           reject(error)
         })
     })
@@ -46,13 +47,16 @@ const actions = {
   //获取当前用户信息
   fetchCurrentUser({ commit }) {
     return new Promise((resolve, reject) => {
-      me().then((currentUser) => {
-        commit('SET_CURRENT_USER', currentUser)
-        setCurrentUser(currentUser)
-        resolve(currentUser)
-      })
-    }).catch((error) => {
-      reject(error)
+      me()
+        .then((currentUser) => {
+          commit('SET_CURRENT_USER', currentUser)
+          setCurrentUser(currentUser)
+          resolve(currentUser)
+        })
+        .catch((error) => {
+          console.log(error)
+          reject(error)
+        })
     })
   }
 }

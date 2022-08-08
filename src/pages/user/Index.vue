@@ -25,15 +25,18 @@ export default {
     const columns = [
       {
         field: 'id',
-        label: 'ID'
+        label: 'ID',
+        align: 'center'
       },
       {
         field: 'username',
-        label: '用户名'
+        label: '用户名',
+        align: 'center'
       },
       {
         field: 'nickname',
-        label: '昵称'
+        label: '昵称',
+        align: 'center'
       }
     ]
 

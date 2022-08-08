@@ -4,12 +4,19 @@
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="left = !left" />
 
-        <q-toolbar-title> ♣️音乐 </q-toolbar-title>
+        <q-toolbar-title> 梅花音乐后台管理系统 </q-toolbar-title>
 
         <q-space />
-        <q-avatar color="teal" text-color="white">{{
-          nicknameFirstWord
-        }}</q-avatar>
+        <q-avatar color="teal" text-color="white"
+          >{{ nicknameFirstWord }}
+          <q-menu fit>
+            <q-list style="min-width: 100px">
+              <q-item clickable v-close-popup @click="logout">
+                <q-item-section>退出</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-avatar>
       </q-toolbar>
     </q-header>
 
@@ -57,7 +64,11 @@ export default {
         () => store.getters['user/nicknameFirstWord']
       ),
       menuRoutes,
-      route
+      route,
+      logout: () =>
+        store.dispatch('user/logout').then(() => {
+          window.location.reload()
+        })
     }
   },
   data() {
