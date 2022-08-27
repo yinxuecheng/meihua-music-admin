@@ -1,5 +1,9 @@
 <script setup>
-import Layout from './pages/Layout.vue'
+import { onMounted } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
+onMounted(store.dispatch('setting/fetchSiteSetting'))
 </script>
 
 <template>
